@@ -12,13 +12,13 @@ public class Dono {
         return true;
     }
 
-    static String editar(){
-
-        return "oi";
+    String editar(String novoNome){
+    	this.nome = novoNome;
+        return novoNome;
     }
     
-    void nome(){
-        System.out.println(this.nome);
+    String nome(){
+        return this.nome;
     }
 
     static boolean excluir(){
