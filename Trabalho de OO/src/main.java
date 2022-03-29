@@ -2,9 +2,9 @@ public class main {
 
 	public static void main(String[] args) {
 		DB db = new DB();
-		Swing s = new Swing();
+		Swing s = new Swing(db);
 
-		s.LoginPage(db);
+		s.LoginPage();
 	}
 }
 

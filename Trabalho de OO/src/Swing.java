@@ -2,33 +2,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 public class Swing {
+    private static  DB db;
+    Swing(DB dbReference){
+        db = dbReference;
+    }
 
 	// Telas
-	private static JFrame f = new JFrame("Tela de Login");
-	private static JFrame dashboardFrame = new JFrame("Dashboard");
+	private static final JFrame f = new JFrame("Tela de Login");
+    private static JFrame dashboardFrame;
 	
-    private static JButton buttonRegister = new JButton("Registrar-se");
+    private static final JButton buttonRegister = new JButton("Registrar-se");
     private static JButton buttonLogin;
     private static JTextField userLoginText;
-    private static JTextField userRegisterText = new JTextField(20);
+    private static final JTextField userRegisterText = new JTextField(20);
+
+    private static boolean isLogged = false;
 
     
     public static class LoginEvent implements ActionListener {
-		DB db;
-		LoginEvent(DB dbReference){
-			db = dbReference;
-		}
 		public void actionPerformed(ActionEvent evt){
-            System.out.println("login: " + userLoginText.getText());
-            db.SearchDono(userLoginText.getText());
+
+            isLogged = db.SearchDono(userLoginText.getText());
+            if(isLogged){
+                f.setVisible(false);
+                Swing.Dashboard(userLoginText.getText());
+            }
         }
     }
 
     public static class RegisterEvent implements ActionListener {
-		DB db;
-        RegisterEvent(DB dbReference){
-            db = dbReference;
-        }
         public void actionPerformed(ActionEvent evt){
             System.out.println("register clicado");
             db.InsertDono(userRegisterText.getText());
@@ -42,7 +44,7 @@ public class Swing {
 
     
     //Pagina de Login
-     public static void LoginPage(DB db){
+     public static void LoginPage(){
          userLoginText = new JTextField(20);
          userLoginText.setBounds(100,30, 160, 25);
          f.add(userLoginText);
@@ -53,7 +55,7 @@ public class Swing {
          f.setSize(400,500);
          f.setLayout(null);
          f.setVisible(true);
-         buttonLogin.addActionListener(new LoginEvent(db));
+         buttonLogin.addActionListener(new LoginEvent());
 
          userRegisterText.setBounds(1000,30, 160, 25);
          f.add(userRegisterText);
@@ -63,12 +65,18 @@ public class Swing {
          f.setSize(400,500);
          f.setLayout(null);
          f.setVisible(true);
-         buttonRegister.addActionListener(new RegisterEvent(db));
+         buttonRegister.addActionListener(new RegisterEvent());
      }
      
      //Dashboard Principal
-     public static void Dashboard(){
-     	
+     public static void Dashboard(String name){
+        dashboardFrame = new JFrame("Dashboard, Bem vindo: " + name);
+     	JButton createCarButton = new JButton("Cadastrar veiculo");
+     	dashboardFrame.setSize(400,500);
+     	dashboardFrame.setLayout(null);
+
+     	dashboardFrame.add(createCarButton);
+     	dashboardFrame.setVisible(true);
      }
 
 }

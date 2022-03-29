@@ -17,7 +17,7 @@ public class DB {
 
     public boolean SearchDono(String nome){
         if(contadorDonos < 0){
-            System.out.println("Não há registros ainda");
+            System.out.println("Nao ha registros ainda");
             return false;
         }
     	for(int cont = 0; cont <= contadorDonos; cont++) {
