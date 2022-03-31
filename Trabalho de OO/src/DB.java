@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class DB {
     private static Dono[] donos = new Dono[50];
     int contadorDonos = -1;
+    int contadorCarros = -1;
     private Carro[] veiculos = new Carro[50];
     private Receita[] receitas = new Receita[50];
     private Despesa[] despesas = new Despesa[50];
@@ -28,6 +32,27 @@ public class DB {
     	}
     	System.out.println("Nao achei");
     	return false;
+    }
+
+    public void InsertCar(String donoVeiculo, String marca , String modelo){
+        contadorCarros++;
+        veiculos[contadorCarros] = new Carro(donoVeiculo ,marca , modelo);
+        System.out.println("qntd carros: " + contadorCarros);
+    }
+
+    public ArrayList<String> GetAllCarsByOwner(String name){
+        if (contadorCarros < 0) {
+			System.out.println("Nao ha carros ainda");
+		}
+        ArrayList<String> carsOfOwnerList = new ArrayList<String>(Arrays.asList(new String[50]));
+        for(int i = 0; i <= contadorCarros; i++){
+            System.out.println(veiculos[contadorCarros].getName());
+            if(name.equals(veiculos[contadorCarros].getName())){
+               carsOfOwnerList.add(veiculos[contadorCarros].getModel());
+            }
+        }
+
+        return carsOfOwnerList;
     }
     
 }

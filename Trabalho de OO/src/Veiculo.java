@@ -29,5 +29,13 @@ public abstract class Veiculo {
         
         return "Oi";
     }
+    
+    String getName(){
+        return this.donoVeiculo;
+    }
+    
+    String getModel(){
+        return this.modelo;
+    }
         
 }
