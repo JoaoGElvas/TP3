@@ -12,11 +12,9 @@ public class DB {
     private Abastecimentos[] abastecimentos = new Abastecimentos[50];
     
     public void InsertDono(String nome){
-        if(contadorDonos < 0) contadorDonos++;
-        
+        contadorDonos++;
         donos[contadorDonos] = new Dono(nome);
         donos[contadorDonos].nome();
-        contadorDonos++;
     }
 
     public boolean SearchDono(String nome){
@@ -26,7 +24,6 @@ public class DB {
         }
     	for(int cont = 0; cont <= contadorDonos; cont++) {
     		if(nome.equals(donos[cont].nome())) {
-                System.out.println("Achei");
     			return true;
     		}
     	}
@@ -37,18 +34,16 @@ public class DB {
     public void InsertCar(String donoVeiculo, String marca , String modelo){
         contadorCarros++;
         veiculos[contadorCarros] = new Carro(donoVeiculo ,marca , modelo);
-        System.out.println("qntd carros: " + contadorCarros);
     }
 
     public ArrayList<String> GetAllCarsByOwner(String name){
         if (contadorCarros < 0) {
 			System.out.println("Nao ha carros ainda");
 		}
-        ArrayList<String> carsOfOwnerList = new ArrayList<String>(Arrays.asList(new String[50]));
+        ArrayList<String> carsOfOwnerList = new ArrayList<String>();
         for(int i = 0; i <= contadorCarros; i++){
-            System.out.println(veiculos[contadorCarros].getName());
-            if(name.equals(veiculos[contadorCarros].getName())){
-               carsOfOwnerList.add(veiculos[contadorCarros].getModel());
+            if(name.equals(veiculos[i].getName())){
+               carsOfOwnerList.add(veiculos[i].getModel());
             }
         }
 
