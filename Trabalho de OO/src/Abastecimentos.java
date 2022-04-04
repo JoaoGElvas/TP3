@@ -13,6 +13,10 @@ public class Abastecimentos {
         this.litros = litros;
 		return true;
     }
+    
+    void getInfo(){
+		System.out.println(this.litros + " "+ this.precoLitro);
+    }
 
 	static boolean excluirAbastecimento(){
         

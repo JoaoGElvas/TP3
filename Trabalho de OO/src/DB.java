@@ -1,21 +1,42 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class DB {
     private static Dono[] donos = new Dono[50];
     int contadorDonos = -1;
     int contadorCarros = -1;
-    private Carro[] veiculos = new Carro[50];
+    public Carro[] veiculos = new Carro[50];
     private Receita[] receitas = new Receita[50];
     private Despesa[] despesas = new Despesa[50];
     private Relatorio[] relatorios = new Relatorio[50];
-    private Abastecimentos[] abastecimentos = new Abastecimentos[50];
     
     public void InsertDono(String nome){
         contadorDonos++;
         donos[contadorDonos] = new Dono(nome);
-        donos[contadorDonos].nome();
     }
+    
+    
+
+    public void InsertAbastecimento (double precoLitro, double litros, double valor , String owner, String carToAdd ) {
+        for (int i = 0; i < contadorCarros; i++) {
+  			if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+                Veiculo veiculo = SearchCar(owner, carToAdd);
+                veiculo.addAbastecimento(new Abastecimentos(precoLitro,litros,valor));
+  			}
+  		} 
+    }
+    
+    public void SearchAllAbastecimentos(String owner, String carToAdd ) {
+        for (int i = 0; i < contadorCarros; i++) {
+            if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+               veiculos[contadorCarros].showAllAbastecimentos();            
+            }
+        } 
+    }
+    
+    
+
 
     public boolean SearchDono(String nome){
         if(contadorDonos < 0){
@@ -47,7 +68,20 @@ public class DB {
             }
         }
 
+
         return carsOfOwnerList;
     }
+
+
+    public Veiculo SearchCar(String owner , String carToFindModel) {
+        Veiculo carToReturn = veiculos[0];
+        for (int i = 0; i < contadorCarros; i++) {
+			if(owner.equals(veiculos[contadorCarros].getName()) && carToFindModel.equals(veiculos[contadorCarros].getModel())){
+                carToReturn = veiculos[contadorCarros];
+                return carToReturn;
+			}
+		}
+		return carToReturn;
+	}
     
 }
