@@ -44,7 +44,7 @@ public class DB {
         if (contadorCarros < 0) {
 			System.out.println("Nao ha carros ainda");
 		}
-        ArrayList<String> carsOfOwnerList = new ArrayList<String>(Arrays.asList(new String[50]));
+        ArrayList<String> carsOfOwnerList = new ArrayList<String>();
         for(int i = 0; i <= contadorCarros; i++){
             System.out.println(veiculos[contadorCarros].getName());
             if(name.equals(veiculos[contadorCarros].getName())){

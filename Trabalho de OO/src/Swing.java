@@ -84,7 +84,6 @@ public class Swing {
      public static void Dashboard(String name){
          ArrayList<String> cars = db.GetAllCarsByOwner(name);
 
-
         dashboardFrame = new JFrame("Dashboard, Bem vindo: " + name);
      	dashboardFrame.setSize(400,500);
      	dashboardFrame.setLayout(null);
@@ -97,12 +96,12 @@ public class Swing {
         createCarButton.addActionListener(new LoginEvent());
 
 
-        JLabel carrroLabel = new JLabel("Carro: ");
-        carrroLabel.setBounds(400, 200, 100, 80);
-        loginframe.add(carrroLabel);
+        JLabel carroLabel = new JLabel("Carro: ");
+        carroLabel.setBounds(400, 200, 100, 80);
+        loginframe.add(carroLabel);
         JList carsList = new JList(cars.toArray());
-        
-        
+
+
         System.out.println(cars);
         carsList.setBounds(600, 200, 200, 100);
         dashboardFrame.add(BorderLayout.CENTER , carsList);
