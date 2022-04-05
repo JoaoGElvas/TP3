@@ -16,7 +16,7 @@ public class DB {
         donos[contadorDonos] = new Dono(nome);
     }
     
-    
+	// Abastecimento
 
     public void InsertAbastecimento (double precoLitro, double litros, double valor , String owner, String carToAdd ) {
         for (int i = 0; i < contadorCarros; i++) {
@@ -27,16 +27,61 @@ public class DB {
   		} 
     }
     
-    public void SearchAllAbastecimentos(String owner, String carToAdd ) {
+    public Abastecimentos[] SearchAllAbastecimentos(String owner, String carToAdd ) {
+        int posToReturn = 0;
         for (int i = 0; i < contadorCarros; i++) {
             if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
-               veiculos[contadorCarros].showAllAbastecimentos();            
+               posToReturn = contadorCarros;         
             }
-        } 
+        }
+        return veiculos[posToReturn].abastecimentos;   
+    }
+    
+    //Despesa
+    
+    public void InsertDespesa (String tipoDespesa , double valorDespesa, String observacaoDespesa, String owner, String carToAdd ) {
+        for (int i = 0; i < contadorCarros; i++) {
+  			if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+                Veiculo veiculo = SearchCar(owner, carToAdd);
+                veiculo.addDespesa(new Despesa(tipoDespesa,valorDespesa,observacaoDespesa));
+  			}
+  		} 
+    }
+    
+    public Despesa[] SearchAllDespesas(String owner, String carToAdd ) {
+        int posToReturn = 0;
+        for (int i = 0; i < contadorCarros; i++) {
+            if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+               posToReturn = contadorCarros;         
+            }
+        }
+        return veiculos[posToReturn].despesas;   
+    } 
+    
+    //Receita
+    
+    public void InsertReceita (String tipoReceita, double valorReceita, String observacaoReceita, String owner, String carToAdd ) {
+        for (int i = 0; i < contadorCarros; i++) {
+  			if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+                Veiculo veiculo = SearchCar(owner, carToAdd);
+                veiculo.addReceita(new Receita(tipoReceita,valorReceita,observacaoReceita));
+  			}
+  		} 
+    }
+    
+    public Receita[] SearchAllReceitas(String owner, String carToAdd ) {
+        int posToReturn = 0;
+        for (int i = 0; i < contadorCarros; i++) {
+            if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+               posToReturn = contadorCarros;         
+            }
+        }
+        return veiculos[posToReturn].receitas;   
     }
     
     
-
+    
+    //
 
     public boolean SearchDono(String nome){
         if(contadorDonos < 0){

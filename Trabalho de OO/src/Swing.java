@@ -115,6 +115,7 @@ public class Swing {
 
      public static void EditCarView(String name , String carName ){
          Veiculo car = db.SearchCar(name, carName);
+         Abastecimentos[] abastecimentos = db.SearchAllAbastecimentos(name, carName);
          
          
          JFrame editCarViewFrame = new JFrame("Edite seu carro: " + carName );
@@ -123,19 +124,30 @@ public class Swing {
          // info do carro
          JLabel donoInfo = new JLabel("Dono: " + car.getName());
          donoInfo.setBounds(820,150 , 250, 25);
-         
-         
+
+
          JLabel modeloInfo = new JLabel("Modelo: " + car.getModel());
          modeloInfo.setBounds(820,160 , 250, 25);
-         
+
          JLabel marcaInfo = new JLabel("Marca: " + car.getMarca());
          marcaInfo.setBounds(820,170 , 250, 25);
+     
+
+         JLabel abastecimentoInfo = new JLabel("Abastecimento: ");
+         abastecimentoInfo.setBounds(820,180 , 250, 25);
+         editCarViewFrame.add(abastecimentoInfo);
          
-         JLabel abastecimentosInfo = new JLabel("Abastecimento ex");
-         abastecimentosInfo.setBounds(820,180 , 250, 25);
+         JList listAbastecimentos = new JList(car.getAllAbastecimentos().toArray());
          
-         JLabel despesasInfo = new JLabel("Info das despesas");
+         listAbastecimentos.setBounds(50, 50, 250, 250);
+         editCarViewFrame.add(listAbastecimentos);
+         
+         JLabel despesasInfo = new JLabel("Despesas: ");
          despesasInfo.setBounds(820,190 , 250, 25);
+         
+         JList listDespesas = new JList(car.getAllDespesas().toArray());
+         listDespesas.setBounds(500, 50, 250, 250);
+         editCarViewFrame.add(listDespesas);
          
          JLabel receitaInfo = new JLabel("info das receitas");
          receitaInfo.setBounds(820, 200 , 250, 25);
@@ -149,14 +161,19 @@ public class Swing {
          LitroLabel.setText("Quantidade de Litros: ");
          LitroLabel.setBounds(350, 350, 160, 25);
          
+         JList listReceitas = new JList(car.getAllReceitas().toArray());
+          listReceitas.setBounds(1000, 50, 250, 250);
+          editCarViewFrame.add(listReceitas);
+         
          JTextField userPrecoLitroText = new JTextField(20);
 	     userPrecoLitroText.setBounds(140,350, 160, 25);
 	     
          JTextField userLitroText = new JTextField(20);
          userLitroText.setBounds(340,350, 160, 25);
          
-         JButton abastecimento = new JButton ("Adicionar abastecimento");
-         abastecimento.setBounds(740,350, 250, 25);
+         JButton abastecimentoButton = new JButton ("Adicionar abastecimento");
+         abastecimentoButton.setBounds(740,350, 250, 25);
+
          
          class PrecoLitroEvent implements ActionListener {
             public void actionPerformed(ActionEvent evt) {
@@ -170,7 +187,7 @@ public class Swing {
                 double litro = Double.parseDouble(userLitroText.getText());
                 
                 double valor = precoLitro * litro;
-                System.out.println(valor);	
+                System.out.println("Valor litro: " + valor);
                 db.InsertAbastecimento(precoLitro, litro, valor, name, carName);
                 
             }
@@ -178,7 +195,7 @@ public class Swing {
          
          
 
-         abastecimento.addActionListener(new PrecoLitroEvent());
+         abastecimentoButton.addActionListener(new PrecoLitroEvent());
          
          
          
@@ -205,8 +222,24 @@ public class Swing {
            JTextField userobservacaoDespesaText = new JTextField(50);
            userobservacaoDespesaText.setBounds(540,400, 160, 25);
  
-           JButton buttonAdicionarDespesa = new JButton ("Adicionar despesa");
-           buttonAdicionarDespesa.setBounds(740,400, 250, 25);
+           JButton despesaButton = new JButton ("Adicionar despesa");
+           despesaButton.setBounds(740,400, 250, 25);
+           
+           class DespesasEvent implements ActionListener {
+               public void actionPerformed(ActionEvent evt) {
+                   System.out.println("Tipo despesa: " + usertipoDespesaText.getText());
+                   System.out.println("OBS despesa: " +observacaoDespesa.getText());                  
+
+                   uservalorDespesaText.getText().replaceAll( "," , "." );
+                   double valordespesaParsed = Double.parseDouble(uservalorDespesaText.getText());
+                   System.out.println("Valor despesa: " + valordespesaParsed);
+                   db.InsertDespesa(tipoDespesa.getText(), valordespesaParsed, observacaoDespesa.getText(), name, carName);
+
+               }
+           }
+
+
+           despesaButton.addActionListener(new DespesasEvent());
 
          //Receita
 
@@ -231,8 +264,27 @@ public class Swing {
            JTextField userobservacaoReceitaText = new JTextField(50);
            userobservacaoReceitaText.setBounds(540,450, 160, 25);
  
-           JButton buttonAdicionarReceita = new JButton ("Adicionar receita");
-           buttonAdicionarReceita.setBounds(740,450, 250, 25);
+           JButton receitaButton = new JButton ("Adicionar receita");
+           receitaButton.setBounds(740,450, 250, 25);
+           
+           class ReceitaEvent implements ActionListener {
+               public void actionPerformed(ActionEvent evt) {
+                   System.out.println("Tipo receita: " + usertipoReceitaText.getText());
+                   System.out.println("OBS receita: " +userobservacaoReceitaText.getText());      
+
+                   uservalorReceitaText.getText().replaceAll( "," , "." );
+                   double valoreceitaParsed = Double.parseDouble(uservalorReceitaText.getText());
+                   System.out.println("Valor receita: " + valoreceitaParsed);
+                   
+                   db.InsertReceita(tipoReceita.getText(), valoreceitaParsed, observacaoReceita.getText(), name, carName);
+
+               }
+           }
+
+
+           receitaButton.addActionListener(new ReceitaEvent());
+           
+           
 
          // Relatorio
 
@@ -245,7 +297,7 @@ public class Swing {
            
            
       // ADD Abastecimento
-      editCarViewFrame.add(abastecimento);
+      editCarViewFrame.add(abastecimentoButton);
       editCarViewFrame.add(LitroLabel);
       editCarViewFrame.add(precoLitroLabel);
       editCarViewFrame.add(userPrecoLitroText);
@@ -259,7 +311,7 @@ public class Swing {
         editCarViewFrame.add(usertipoDespesaText);
         editCarViewFrame.add(uservalorDespesaText);
         editCarViewFrame.add(userobservacaoDespesaText);
-        editCarViewFrame.add(buttonAdicionarDespesa);
+        editCarViewFrame.add(despesaButton);
         
      // ADD Receita        
         
@@ -269,7 +321,7 @@ public class Swing {
         editCarViewFrame.add(usertipoReceitaText);
         editCarViewFrame.add(uservalorReceitaText);
         editCarViewFrame.add(userobservacaoReceitaText);
-        editCarViewFrame.add(buttonAdicionarReceita);
+        editCarViewFrame.add(receitaButton);
         
         
      // ADD Relatorio  
@@ -281,8 +333,7 @@ public class Swing {
         
         editCarViewFrame.add(donoInfo); 
         editCarViewFrame.add(modeloInfo); 
-        editCarViewFrame.add(marcaInfo); 
-        editCarViewFrame.add(abastecimentosInfo); 
+        editCarViewFrame.add(marcaInfo);
         editCarViewFrame.add(despesasInfo); 
         editCarViewFrame.add(receitaInfo); 
         

@@ -1,14 +1,14 @@
 public class Despesa {
-    private String precoLitro;
+    private String tipoDespesa;
     private	double valor;
     private String observacao;
 
-    public Despesa(String precoLitro, double valor, String observacao){
-        this.criar(precoLitro, valor, observacao);
+    public Despesa(String tipoDespesa, double valorDespesa, String observacaoDespesa){
+        this.criar(tipoDespesa, valorDespesa, observacaoDespesa);
     }
 
-    boolean criar(String precoLitro, double valor, String observacao){
-        this.precoLitro = precoLitro;
+    boolean criar(String tipoDespesa, double valor, String observacao){
+        this.tipoDespesa = tipoDespesa;
         this.valor = valor;
         this.observacao = observacao;
 		return true;
@@ -18,7 +18,11 @@ public class Despesa {
         
         return "Editar";
     }
-
+    
+    String getInfo(){
+        return "Tipo de despesa: " + this.tipoDespesa + " Valor: " + this.valor;
+    }
+    
 	static boolean excluir(){
         
         return true;
