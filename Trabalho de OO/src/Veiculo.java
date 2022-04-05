@@ -3,7 +3,8 @@ public abstract class Veiculo {
     private String modelo;
     private double quilometragem;
     private String donoVeiculo;
-    private double abastecimento;
+    public Abastecimentos[] abastecimentos = new Abastecimentos[20];
+    private int contAbastecimentos = -1;
     private double servicos;
     private double despesas;
     private double receita;
@@ -29,6 +30,19 @@ public abstract class Veiculo {
         
         return "Oi";
     }
+
+    boolean addAbastecimento(Abastecimentos abastecimento){
+        contAbastecimentos++;
+        this.abastecimentos[contAbastecimentos] = abastecimento;
+        return true;
+    }
+    
+    void showAllAbastecimentos(){
+        for (int i = 0; i <= contAbastecimentos; i++) {
+			this.abastecimentos[contAbastecimentos].getInfo();
+		}
+    }
+
     
     String getName(){
         return this.donoVeiculo;
@@ -36,6 +50,10 @@ public abstract class Veiculo {
     
     String getModel(){
         return this.modelo;
+    }
+    
+    String getMarca(){
+        return this.marca;
     }
         
 }
