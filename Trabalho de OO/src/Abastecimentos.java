@@ -1,4 +1,4 @@
-public class Abastecimentos {
+    public class Abastecimentos {
 	private double precoLitro;
 	private	double valor;
 	private double litros;
@@ -14,8 +14,8 @@ public class Abastecimentos {
 		return true;
     }
     
-    void getInfo(){
-		System.out.println(this.litros + " "+ this.precoLitro);
+    String getInfo(){
+		return "Litros: " + this.litros + " Preco do litro: " + this.precoLitro;
     }
 
 	static boolean excluirAbastecimento(){
