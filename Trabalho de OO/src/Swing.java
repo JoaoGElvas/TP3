@@ -81,24 +81,35 @@ public class Swing {
      public static void Dashboard(String name){
          ArrayList<String> cars = db.GetAllCarsByOwner(name);
          JList carsList = new JList(cars.toArray());
+
+         dashboardFrame = new JFrame("Dashboard, Bem vindo: " + name);
+
         class EditCarEvent implements ActionListener {
             public void actionPerformed(ActionEvent evt){
+                dashboardFrame.setVisible(false);
                  EditCarView(name , cars.get(carsList.getSelectedIndex()));
             }
         }
+
+         class CreateCarEvent implements ActionListener {
+             public void actionPerformed(ActionEvent evt){
+                 dashboardFrame.setVisible(false);
+                 CreateCarView(name);
+             }
+         }
         
           JButton EditCarButton = new JButton("Editar veiculo selecionado");
           EditCarButton.addActionListener(new EditCarEvent());
-          EditCarButton.setBounds(600,500,200, 80);    
+          EditCarButton.setBounds(600,500,200, 80);
 
-        dashboardFrame = new JFrame("Dashboard, Bem vindo: " + name);
      	dashboardFrame.setSize(400,500);
+     	dashboardFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
      	
      	
      	JButton createCarButton = new JButton("Cadastrar veiculo");
      	createCarButton.setBounds(600,80,200, 80);
 
-        createCarButton.addActionListener(new LoginEvent());
+        createCarButton.addActionListener(new CreateCarEvent());
         
         carsList.setBounds(600, 200, 200, 100);
         dashboardFrame.setLocationRelativeTo(null);
@@ -111,6 +122,47 @@ public class Swing {
 
      //Car view
 
+    public static void CreateCarView(String name){
+        JFrame createCarFrame = new JFrame("Adicione seu carro: ");
+        createCarFrame.setLocationRelativeTo(null);
+        createCarFrame.setSize(400 , 500);
+        createCarFrame.setLayout(null);
+
+        JLabel carModelLabel = new JLabel("Modelo: ");
+        carModelLabel.setBounds(100,50, 160, 25);
+
+        JTextField carModelInput = new JTextField(30);
+        carModelInput.setBounds(100,70, 160, 25);
+
+        JLabel carBrandLabel = new JLabel("Marca: ");
+        carBrandLabel.setBounds(100,90, 160, 25);
+
+        JTextField carBrandInput = new JTextField(30);
+        carBrandInput.setBounds(100,110, 160, 25);
+
+        class CreateCarEvent implements ActionListener {
+            public void actionPerformed(ActionEvent evt){
+                System.out.println(carModelInput.getText());
+                System.out.println(carBrandInput.getText());
+                db.InsertCar(name , carBrandInput.getText(), carModelInput.getText());
+                createCarFrame.setVisible(false);
+                Dashboard(name);
+            }
+        }
+
+        JButton createCarButton = new JButton("Adicionar");
+        createCarButton.setBounds(100,130, 160, 25);
+        createCarButton.addActionListener(new CreateCarEvent());
+
+
+        createCarFrame.add(carModelLabel);
+        createCarFrame.add(carModelInput);
+        createCarFrame.add(carBrandInput);
+        createCarFrame.add(carBrandLabel);
+        createCarFrame.add(createCarButton);
+        createCarFrame.setVisible(true);
+    }
+
      public static void EditCarView(String name , String carName ){
          Veiculo car = db.SearchCar(name, carName);
          Abastecimentos[] abastecimentos = db.SearchAllAbastecimentos(name, carName);
@@ -118,7 +170,8 @@ public class Swing {
          
          JFrame editCarViewFrame = new JFrame("Edite seu carro: " + carName );
          editCarViewFrame.setLocationRelativeTo(null);
-         editCarViewFrame.setSize(400,500);
+         editCarViewFrame.setSize(1200,1000);
+         editCarViewFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
          
          // info do carro
          JLabel donoInfo = new JLabel("Dono: " + car.getName());
@@ -158,7 +211,7 @@ public class Swing {
          
          // Abastecimento
          JLabel precoLitroLabel = new JLabel();
-         precoLitroLabel.setText("Preço por litro: ");
+         precoLitroLabel.setText("Preï¿½o por litro: ");
          precoLitroLabel.setBounds(50,500, 160, 25);
 
          JLabel LitroLabel = new JLabel();
@@ -190,7 +243,8 @@ public class Swing {
                 double valor = precoLitro * litro;
                 System.out.println("Valor litro: " + valor);
                 db.InsertAbastecimento(precoLitro, litro, valor, name, carName);
-                
+                editCarViewFrame.setVisible(false);
+                EditCarView(name , carName);
             }
          }
          
@@ -235,7 +289,8 @@ public class Swing {
                    double valordespesaParsed = Double.parseDouble(uservalorDespesaText.getText());
                    System.out.println("Valor despesa: " + valordespesaParsed);
                    db.InsertDespesa(tipoDespesa.getText(), valordespesaParsed, observacaoDespesa.getText(), name, carName);
-
+                   editCarViewFrame.setVisible(false);
+                   EditCarView(name , carName);
                }
            }
 
@@ -278,7 +333,8 @@ public class Swing {
                    System.out.println("Valor receita: " + valoreceitaParsed);
                    
                    db.InsertReceita(tipoReceita.getText(), valoreceitaParsed, observacaoReceita.getText(), name, carName);
-
+                   editCarViewFrame.setVisible(false);
+                   EditCarView(name , carName);
                }
            }
 

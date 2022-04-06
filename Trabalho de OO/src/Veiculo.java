@@ -73,7 +73,7 @@ public abstract class Veiculo {
     List<String> getAllReceitas(){
         ArrayList<String> listReceitas = new ArrayList<String>();
         for (int i = 0; i <= contReceita; i++) {
-            listReceitas.add(this.despesas[i].getInfo());
+            listReceitas.add(this.receitas[i].getInfo());
         }
         return listReceitas;
     }

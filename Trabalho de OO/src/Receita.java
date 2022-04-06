@@ -19,6 +19,10 @@ public class Receita {
         return "Editar";
     }
 
+	String getInfo(){
+		return "Tipo: " + this.tipoReceita + " valor: " + this.valor;
+	}
+
 	static boolean excluir(){
         
         return true;
