@@ -19,18 +19,18 @@ public class DB {
 	// Abastecimento
 
     public void InsertAbastecimento (double precoLitro, double litros, double valor , String owner, String carToAdd ) {
-        for (int i = 0; i < contadorCarros; i++) {
-  			if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+        for (int i = 0; i <= contadorCarros; i++) {
+  			if(owner.equals(veiculos[i].getName()) && carToAdd.equals(veiculos[i].getModel())){
                 Veiculo veiculo = SearchCar(owner, carToAdd);
-                veiculo.addAbastecimento(new Abastecimentos(precoLitro,litros,valor));
+                veiculo.addAbastecimento(new Abastecimentos(precoLitro,valor,litros));
   			}
   		} 
     }
     
     public Abastecimentos[] SearchAllAbastecimentos(String owner, String carToAdd ) {
         int posToReturn = 0;
-        for (int i = 0; i < contadorCarros; i++) {
-            if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+        for (int i = 0; i <= contadorCarros; i++) {
+            if(owner.equals(veiculos[i].getName()) && carToAdd.equals(veiculos[i].getModel())){
                posToReturn = contadorCarros;         
             }
         }
@@ -40,8 +40,8 @@ public class DB {
     //Despesa
     
     public void InsertDespesa (String tipoDespesa , double valorDespesa, String observacaoDespesa, String owner, String carToAdd ) {
-        for (int i = 0; i < contadorCarros; i++) {
-  			if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+        for (int i = 0; i <= contadorCarros; i++) {
+  			if(owner.equals(veiculos[i].getName()) && carToAdd.equals(veiculos[i].getModel())){
                 Veiculo veiculo = SearchCar(owner, carToAdd);
                 veiculo.addDespesa(new Despesa(tipoDespesa,valorDespesa,observacaoDespesa));
   			}
@@ -51,7 +51,7 @@ public class DB {
     public Despesa[] SearchAllDespesas(String owner, String carToAdd ) {
         int posToReturn = 0;
         for (int i = 0; i < contadorCarros; i++) {
-            if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+            if(owner.equals(veiculos[i].getName()) && carToAdd.equals(veiculos[i].getModel())){
                posToReturn = contadorCarros;         
             }
         }
@@ -61,8 +61,8 @@ public class DB {
     //Receita
     
     public void InsertReceita (String tipoReceita, double valorReceita, String observacaoReceita, String owner, String carToAdd ) {
-        for (int i = 0; i < contadorCarros; i++) {
-  			if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+        for (int i = 0; i <= contadorCarros; i++) {
+  			if(owner.equals(veiculos[i].getName()) && carToAdd.equals(veiculos[i].getModel())){
                 Veiculo veiculo = SearchCar(owner, carToAdd);
                 veiculo.addReceita(new Receita(tipoReceita,valorReceita,observacaoReceita));
   			}
@@ -72,7 +72,7 @@ public class DB {
     public Receita[] SearchAllReceitas(String owner, String carToAdd ) {
         int posToReturn = 0;
         for (int i = 0; i < contadorCarros; i++) {
-            if(owner.equals(veiculos[contadorCarros].getName()) && carToAdd.equals(veiculos[contadorCarros].getModel())){
+            if(owner.equals(veiculos[i].getName()) && carToAdd.equals(veiculos[i].getModel())){
                posToReturn = contadorCarros;         
             }
         }
@@ -120,9 +120,9 @@ public class DB {
 
     public Veiculo SearchCar(String owner , String carToFindModel) {
         Veiculo carToReturn = veiculos[0];
-        for (int i = 0; i < contadorCarros; i++) {
-			if(owner.equals(veiculos[contadorCarros].getName()) && carToFindModel.equals(veiculos[contadorCarros].getModel())){
-                carToReturn = veiculos[contadorCarros];
+        for (int i = 0; i <= contadorCarros; i++) {
+			if(owner.equals(veiculos[i].getName()) && carToFindModel.equals(veiculos[i].getModel())){
+                carToReturn = veiculos[i];
                 return carToReturn;
 			}
 		}

@@ -9,8 +9,8 @@ public class main {
 		db.InsertCar("bruno", "UMA MARCA up", "UP");
 		db.InsertDono("joao");
 		db.InsertDono("bruno");
-		db.InsertAbastecimento(2.5, 10, 5.3, "bruno", "UP");
-		db.InsertAbastecimento(3.1, 10, 8.3, "bruno", "UP");
+		db.InsertAbastecimento(2.5, 10, 2.5 * 10, "bruno", "UP");
+		db.InsertAbastecimento(3.1, 10, 3.1 * 10, "bruno", "UP");
 		db.InsertDespesa("Revisao", 250, "", "bruno", "UP");
 		db.InsertDespesa("Rodas novas", 120, "", "bruno", "UP");
 		db.InsertReceita("Uber", 35, "", "bruno", "UP");
@@ -18,7 +18,8 @@ public class main {
 		db.SearchAllAbastecimentos("bruno", "UP");
 		
 		Veiculo car = db.SearchCar("bruno", "UP");
-		car.getAllAbastecimentos();
+		System.out.println(car.getAllAbastecimentos());
+		new Relatorio(car);
 
 		s.LoginPage();
 	}

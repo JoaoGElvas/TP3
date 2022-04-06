@@ -22,6 +22,10 @@ public class Receita {
 	String getInfo(){
 		return "Tipo: " + this.tipoReceita + " valor: " + this.valor;
 	}
+	
+	double getValor(){
+        return this.valor;
+    }
 
 	static boolean excluir(){
         

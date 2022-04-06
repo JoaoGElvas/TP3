@@ -23,6 +23,10 @@ public class Despesa {
         return "Tipo de despesa: " + this.tipoDespesa + " Valor: " + this.valor;
     }
     
+    double getValor(){
+        return this.valor;
+    }
+    
 	static boolean excluir(){
         
         return true;

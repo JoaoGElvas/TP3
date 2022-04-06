@@ -17,6 +17,10 @@
     String getInfo(){
 		return "Litros: " + this.litros + " Preco do litro: " + this.precoLitro;
     }
+    
+    double getValor(){
+        return this.valor;
+    }
 
 	static boolean excluirAbastecimento(){
         

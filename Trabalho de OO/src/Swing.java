@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
@@ -125,7 +126,7 @@ public class Swing {
     public static void CreateCarView(String name){
         JFrame createCarFrame = new JFrame("Adicione seu carro: ");
         createCarFrame.setLocationRelativeTo(null);
-        createCarFrame.setSize(400 , 500);
+        createCarFrame.setSize(400,500);
         createCarFrame.setLayout(null);
 
         JLabel carModelLabel = new JLabel("Modelo: ");
@@ -151,7 +152,7 @@ public class Swing {
         }
 
         JButton createCarButton = new JButton("Adicionar");
-        createCarButton.setBounds(100,130, 160, 25);
+        createCarButton.setBounds(100,150, 160, 25);
         createCarButton.addActionListener(new CreateCarEvent());
 
 
@@ -190,6 +191,7 @@ public class Swing {
          editCarViewFrame.add(abastecimentoInfo);
          
          JList listAbastecimentos = new JList(car.getAllAbastecimentos().toArray());
+         System.out.println(car.getAllAbastecimentos());
          
          listAbastecimentos.setBounds(50,150, 250, 250);
          editCarViewFrame.add(listAbastecimentos);
@@ -211,7 +213,7 @@ public class Swing {
          
          // Abastecimento
          JLabel precoLitroLabel = new JLabel();
-         precoLitroLabel.setText("Pre�o por litro: ");
+         precoLitroLabel.setText("Preco por litro: ");
          precoLitroLabel.setBounds(50,500, 160, 25);
 
          JLabel LitroLabel = new JLabel();
@@ -242,8 +244,8 @@ public class Swing {
                 
                 double valor = precoLitro * litro;
                 System.out.println("Valor litro: " + valor);
-                db.InsertAbastecimento(precoLitro, litro, valor, name, carName);
-                editCarViewFrame.setVisible(false);
+                db.InsertAbastecimento(precoLitro,valor, litro , name, carName);
+                editCarViewFrame.dispatchEvent(new WindowEvent(editCarViewFrame, WindowEvent.WINDOW_CLOSING));
                 EditCarView(name , carName);
             }
          }
@@ -288,7 +290,7 @@ public class Swing {
                    uservalorDespesaText.getText().replaceAll( "," , "." );
                    double valordespesaParsed = Double.parseDouble(uservalorDespesaText.getText());
                    System.out.println("Valor despesa: " + valordespesaParsed);
-                   db.InsertDespesa(tipoDespesa.getText(), valordespesaParsed, observacaoDespesa.getText(), name, carName);
+                   db.InsertDespesa(usertipoDespesaText.getText(), valordespesaParsed, userobservacaoDespesaText.getText(), name, carName);
                    editCarViewFrame.setVisible(false);
                    EditCarView(name , carName);
                }
@@ -344,11 +346,19 @@ public class Swing {
            
 
          // Relatorio
+         
+         class GerarRelatorioEvent implements ActionListener {
+            public void actionPerformed(ActionEvent evt) {
+                editCarViewFrame.setVisible(false);
+                RelatorioView(car);
+            }
+        }
 
          JButton buttonRelatorio = new JButton("Gerar relatorio");
          buttonRelatorio.setBounds(640,650, 250, 25);
          buttonRelatorio.setContentAreaFilled(false);
          buttonRelatorio.setOpaque(true);
+         buttonRelatorio.addActionListener(new GerarRelatorioEvent());
          buttonRelatorio.setBackground(Color.RED);
            
            
@@ -383,7 +393,7 @@ public class Swing {
         
      // ADD Relatorio  
         
-        editCarViewFrame.add(buttonRelatorio);   
+        editCarViewFrame.add(buttonRelatorio); 
 
         
     // ADD INFO
@@ -398,6 +408,27 @@ public class Swing {
         editCarViewFrame.setLayout(null);
         editCarViewFrame.setVisible(true);
 
+     }
+     
+     static void RelatorioView(Veiculo car){
+         JFrame relatorioFrame = new JFrame("Veja seu relatorio"); 
+         
+         
+         JLabel relatoriosaldoLabel = new JLabel("Saldo: ");
+         relatoriosaldoLabel.setBounds(640,650, 250, 25);
+         relatorioFrame.add(relatoriosaldoLabel);
+         JLabel relatoriocustoLabel = new JLabel("Custo: ");
+         relatoriocustoLabel.setBounds(640,650, 250, 25);
+         relatorioFrame.add(relatoriocustoLabel);
+         JLabel relatorioreceitaLabel = new JLabel("Receita: ");
+         relatorioreceitaLabel.setBounds(640,650, 250, 25);
+         relatorioFrame.add(relatorioreceitaLabel);
+         
+         
+         relatorioFrame.setLocationRelativeTo(null);
+         relatorioFrame.setSize(1200,1000);
+         relatorioFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+         relatorioFrame.setVisible(true);
      }
 
 }
