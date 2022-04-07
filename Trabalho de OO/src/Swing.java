@@ -190,10 +190,24 @@ public class Swing {
          Abastecimentos[] abastecimentos = db.SearchAllAbastecimentos(name, carName);
          
          
+         
+         
          JFrame editCarViewFrame = new JFrame("Edite seu carro: " + carName );
          editCarViewFrame.setLocationRelativeTo(null);
          editCarViewFrame.setSize(1200,1000);
          editCarViewFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+         
+         
+         class backEditCarEvent implements ActionListener {
+             public void actionPerformed(ActionEvent evt){
+                 editCarViewFrame.setVisible(false);
+                 Dashboard(name);
+             }
+         }
+         JButton editCarButtonVoltar = new JButton("Voltar");
+         editCarButtonVoltar.setBounds(640,700, 250, 25);
+         editCarButtonVoltar.addActionListener(new backEditCarEvent());
+         editCarViewFrame.add(editCarButtonVoltar);
          
          // info do carro
          JLabel donoInfo = new JLabel("Dono: " + car.getName());
@@ -434,9 +448,23 @@ public class Swing {
       * @param Veiculo carro para gerar um relatorio 
      * @return void*/
      static void RelatorioView(Veiculo car){
+         
+         
          Relatorio relatorio = new Relatorio(car);
          
-         JFrame relatorioFrame = new JFrame("Veja seu relatorio"); 
+         JFrame relatorioFrame = new JFrame("Veja seu relatorio");
+         
+         
+         class backEditCarEvent implements ActionListener {
+              public void actionPerformed(ActionEvent evt){
+                  relatorioFrame.setVisible(false);
+                  EditCarView(car.getName(), car.getModel());
+              }
+          }
+          JButton relatorioButtonVoltar = new JButton("Voltar");
+          relatorioButtonVoltar.setBounds(50,350, 250, 25);
+          relatorioButtonVoltar.addActionListener(new backEditCarEvent());
+          relatorioFrame.add(relatorioButtonVoltar);
          
          
          JLabel relatoriosaldoLabel = new JLabel("Saldo: " + relatorio.getSaldo());
