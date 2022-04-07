@@ -219,6 +219,8 @@ public class Swing {
 
          JLabel marcaInfo = new JLabel("Marca: " + car.getMarca());
          marcaInfo.setBounds(50,90 , 250, 25);
+         
+     //    System.out.println("");
      
 
          JLabel abastecimentoInfo = new JLabel("Abastecimento: ");
