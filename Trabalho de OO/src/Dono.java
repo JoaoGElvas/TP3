@@ -1,3 +1,7 @@
+/**
+ * Classe Dono
+*/
+
 public class Dono {
     private String nome;
     private int qtdVeiculo;
@@ -6,7 +10,12 @@ public class Dono {
     public Dono(String nome){
         this.criar(nome);
     }
-
+    
+    /**
+     * Registra os valores da despesa 
+     * @param nome nome do dono
+     * @return true 
+    */
     boolean criar(String nome){
         this.nome = nome;
         return true;
@@ -21,8 +30,4 @@ public class Dono {
         return this.nome;
     }
 
-    static boolean excluir(){
-
-        return false;
-    }
 }

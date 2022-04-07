@@ -1,3 +1,7 @@
+/**
+ * Classe Receita
+*/
+
 public class Receita {
 	private String tipoReceita;
 	private	double valor;
@@ -6,7 +10,15 @@ public class Receita {
 	public Receita (String tipoReceita, double valorReceita, String observacaoReceita) {
 		this.criar(tipoReceita, valorReceita, observacaoReceita);
 	}
-
+	
+	
+    /**
+     * Registra os valores da receita 
+     * @param tipoReceita tipo da receita
+     * @param valor valor da receita
+     * @param observacao alguma observacao
+     * @return true 
+    */
 	boolean criar(String tipoReceita, double valor, String observacao){
 		this.tipoReceita = tipoReceita;
         this.valor = valor;
@@ -27,8 +39,4 @@ public class Receita {
         return this.valor;
     }
 
-	static boolean excluir(){
-        
-        return true;
-    }
 }

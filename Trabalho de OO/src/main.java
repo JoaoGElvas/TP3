@@ -19,7 +19,6 @@ public class main {
 		
 		Veiculo car = db.SearchCar("bruno", "UP");
 		System.out.println(car.getAllAbastecimentos());
-		new Relatorio(car);
 
 		s.LoginPage();
 	}

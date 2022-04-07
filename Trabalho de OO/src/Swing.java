@@ -53,6 +53,9 @@ public class Swing {
 
     
     //Pagina de Login
+    
+    /** Método para gerar uma janela de login do swing
+     * @return void*/
      public static void LoginPage(){
          userLoginText = new JTextField(20);
          userLoginText.setBounds(100,30, 160, 25);
@@ -79,6 +82,10 @@ public class Swing {
      }
      
      //Dashboard Principal
+     
+     /** Método para gerar uma janela de dashboard do swing
+     * @param name nome do usuario 
+    * @return void*/
      public static void Dashboard(String name){
          ArrayList<String> cars = db.GetAllCarsByOwner(name);
          JList carsList = new JList(cars.toArray());
@@ -122,7 +129,10 @@ public class Swing {
      }
 
      //Car view
-
+     
+     /** Método para gerar uma janela de criar um carro no swing
+      * @param name nome do usuario 
+     * @return void*/
     public static void CreateCarView(String name){
         JFrame createCarFrame = new JFrame("Adicione seu carro: ");
         createCarFrame.setLocationRelativeTo(null);
@@ -163,7 +173,11 @@ public class Swing {
         createCarFrame.add(createCarButton);
         createCarFrame.setVisible(true);
     }
-
+    
+        /** Método para gerar uma janela de edicao de um carro no swing
+         * @param name nome do usuario
+         * @param carName qual carro do usuario para editar
+        * @return void*/
      public static void EditCarView(String name , String carName ){
          Veiculo car = db.SearchCar(name, carName);
          Abastecimentos[] abastecimentos = db.SearchAllAbastecimentos(name, carName);
@@ -244,7 +258,7 @@ public class Swing {
                 
                 double valor = precoLitro * litro;
                 System.out.println("Valor litro: " + valor);
-                db.InsertAbastecimento(precoLitro,valor, litro , name, carName);
+                db.InsertAbastecimento(precoLitro,litro, valor , name, carName);
                 editCarViewFrame.dispatchEvent(new WindowEvent(editCarViewFrame, WindowEvent.WINDOW_CLOSING));
                 EditCarView(name , carName);
             }
@@ -409,21 +423,39 @@ public class Swing {
         editCarViewFrame.setVisible(true);
 
      }
-     
+     /** Método para gerar uma janela de relatorio do swing
+      * @param Veiculo carro para gerar um relatorio 
+     * @return void*/
      static void RelatorioView(Veiculo car){
+         Relatorio relatorio = new Relatorio(car);
+         
          JFrame relatorioFrame = new JFrame("Veja seu relatorio"); 
          
          
-         JLabel relatoriosaldoLabel = new JLabel("Saldo: ");
-         relatoriosaldoLabel.setBounds(640,650, 250, 25);
+         JLabel relatoriosaldoLabel = new JLabel("Saldo: " + relatorio.getSaldo());
+         relatoriosaldoLabel.setBounds(50,50, 250, 25);
          relatorioFrame.add(relatoriosaldoLabel);
-         JLabel relatoriocustoLabel = new JLabel("Custo: ");
-         relatoriocustoLabel.setBounds(640,650, 250, 25);
+         
+         JLabel relatoriocustoLabel = new JLabel("Custo: " + relatorio.getCustoTotal());
+         relatoriocustoLabel.setBounds(50,100, 250, 25);
          relatorioFrame.add(relatoriocustoLabel);
-         JLabel relatorioreceitaLabel = new JLabel("Receita: ");
-         relatorioreceitaLabel.setBounds(640,650, 250, 25);
+         
+         JLabel relatorioreceitaLabel = new JLabel("Receita: " + relatorio.getReceita());
+         relatorioreceitaLabel.setBounds(50,150, 250, 25);
          relatorioFrame.add(relatorioreceitaLabel);
          
+         JLabel mediaAbastecimentoLabel = new JLabel ("Media dos abastecimentos: " + relatorio.getMediaAbastecimento());
+         mediaAbastecimentoLabel.setBounds(50,200, 250, 25);
+         relatorioFrame.add(mediaAbastecimentoLabel);
+         
+         JLabel mediaDespesaLabel = new JLabel ("Media das despesas: " + relatorio.getMediaDespesa());
+         mediaDespesaLabel.setBounds(50,250, 250, 25);
+         relatorioFrame.add(mediaDespesaLabel);
+         
+         JLabel mediaReceitaLabel = new JLabel ("Media das receitas: " + relatorio.getMediaReceita());
+         mediaReceitaLabel.setBounds(50,300, 250, 25);
+         relatorioFrame.add(mediaReceitaLabel);
+        
          
          relatorioFrame.setLocationRelativeTo(null);
          relatorioFrame.setSize(1200,1000);

@@ -13,6 +13,13 @@ public abstract class Veiculo {
     private double servicos;
     public Despesa[] despesas = new Despesa[20];
     public Receita[] receitas = new Receita[20];
+    
+    /**
+     * Adiciona um veiculo
+     * @param donoVeiculo é o dono do veiculo 
+     * @param marca é a marca do veiculo
+     * @param modelo é o modelo do veiculo 
+    */
 
     public Veiculo (String donoVeiculo, String marca , String modelo){
         this.donoVeiculo = donoVeiculo;
@@ -20,27 +27,27 @@ public abstract class Veiculo {
         this.modelo = modelo;
     }
 
-
-    static boolean excluirVeiculo(){
-        
-        return true;
-    }
-
-    static boolean alterarVeiculo(){
-        
-        return true;
-    }
-
     static String cadastroDono(){
         
         return "Oi";
     }
+    
+    /**
+     * Adiciona abastecimentos no veiculo
+     * @param abastecimento é o abastecimento adicionado no veiculo 
+     * @return true
+    */
 
     boolean addAbastecimento(Abastecimentos abastecimento){
         contAbastecimentos++;
         this.abastecimentos[contAbastecimentos] = abastecimento;
         return true;
     }
+    
+    /**
+     * Pega todos os abastecimentos feitos do veiculo
+     * @return listAbastecimentos
+    */
     
     List<String> getAllAbastecimentos(){
         ArrayList<String> listAbastecimentos = new ArrayList<String>();
@@ -50,11 +57,22 @@ public abstract class Veiculo {
 		return listAbastecimentos;
     }
     
+    /**
+     * Adiciona despesas no veiculo
+     * @param despesa é a despesa adicionada no veiculo 
+     * @return true
+    */
+    
     boolean addDespesa(Despesa despesa){
         contDespesa++;
         this.despesas[contDespesa] = despesa;
         return true;
     }
+    
+    /**
+     * Pega todos as despesas feitas do veiculo
+     * @return listDespesas
+    */
     
     List<String> getAllDespesas(){
         ArrayList<String> listDespesas = new ArrayList<String>();
@@ -64,11 +82,22 @@ public abstract class Veiculo {
         return listDespesas;
     }
     
+    /**
+     * Adiciona receita no veiculo
+     * @param receita é a receita adicionada no veiculo 
+     * @return true
+    */
+    
     boolean addReceita(Receita receita){
         contReceita++;
         this.receitas[contReceita] = receita;
         return true;
     } 
+    
+    /**
+     * Pega todos as receitas feitas do veiculo
+     * @return listReceitas
+    */
     
     List<String> getAllReceitas(){
         ArrayList<String> listReceitas = new ArrayList<String>();
@@ -77,6 +106,8 @@ public abstract class Veiculo {
         }
         return listReceitas;
     }
+    
+    
     
     String getName(){
         return this.donoVeiculo;
