@@ -82,6 +82,7 @@ public class Swing {
          
      }
      
+
      //Dashboard Principal
      
      /** Método para gerar uma janela de dashboard do swing
@@ -128,6 +129,10 @@ public class Swing {
      	dashboardFrame.setLayout(null);
      	dashboardFrame.setVisible(true);
      }
+     
+
+  
+     
 
      //Car view
      
