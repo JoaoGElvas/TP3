@@ -65,10 +65,10 @@ public class Swing {
          buttonLogin.setBounds(100,80,160, 40);
          loginframe.add(buttonLogin);
          loginframe.setSize(400,500);
-         loginframe.setLocationRelativeTo(null);
          loginframe.setLayout(null);
          loginframe.setVisible(true);
          buttonLogin.addActionListener(new LoginEvent());
+         loginframe.setLocationRelativeTo(null);
 
          userRegisterText.setBounds(100,300, 160, 25);
          loginframe.add(userRegisterText);
@@ -79,6 +79,7 @@ public class Swing {
          loginframe.setLayout(null);
          loginframe.setVisible(true);
          buttonRegister.addActionListener(new RegisterEvent());
+         
      }
      
      //Dashboard Principal
@@ -138,6 +139,7 @@ public class Swing {
         createCarFrame.setLocationRelativeTo(null);
         createCarFrame.setSize(400,500);
         createCarFrame.setLayout(null);
+        createCarFrame.setLocationRelativeTo(null);
 
         JLabel carModelLabel = new JLabel("Modelo: ");
         carModelLabel.setBounds(100,50, 160, 25);
@@ -457,11 +459,13 @@ public class Swing {
          relatorioFrame.add(mediaReceitaLabel);
         
          
-         relatorioFrame.setLocationRelativeTo(null);
-         relatorioFrame.setSize(1200,1000);
-         relatorioFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+         
+         relatorioFrame.setSize(400,500);
+         relatorioFrame.setLayout(null);
          relatorioFrame.setVisible(true);
+         relatorioFrame.setLocationRelativeTo(null);
      }
+     
 
 }
 
